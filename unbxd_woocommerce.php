@@ -21,33 +21,62 @@ function unbxd_pim_acions(){
     );
 }
 
+function check_app_initialized($site_url){
+    //Initialize cURL.
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,"https://google.com");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $server_output = curl_exec($ch);
+    curl_close ($ch);
+    if ($server_output == "OK") {
+        return true;
+    } else {
+        return false;
+    }
 
+}
 
 function woocommerceplugin_admin(){
     $site_url = get_site_url();
+    $installation_url = "http://localhost:8000/woocommerce/dashboard/?store_url=".$site_url;
+    $unbxd_pim_installed = check_app_initialized($site_url);
 
     ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pim-static.unbxd.com/prod/1.13.6/css/bundle.css">
     <div class="container mt-5" >
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="https://unbxd.com/wp-content/uploads/2020/01/logo.svg" class="card-img img-responsive mt-5" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">Unbxd PIM Woocommerce</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <a href="http://localhost:8000/woocommerce/install/?store_url="<?php echo $site_url ?> target="_blank" style="width: 200px;" type="button" class="btn btn-primary primary-btn login-btn  font-weight-bold">
-                                Install Unbxd PIM
-                            </a>
-                            <a href="http://localhost:8000/woocommerce/dashboard/?store_url="<?php echo $site_url ?> target="_blank" style="width: 200px;" type="button" class="btn btn-primary primary-btn login-btn  font-weight-bold">Go To </a>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="https://unbxd.com/wp-content/uploads/2020/01/logo.svg" class="card-img img-responsive mt-5" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title font-weight-bold">Unbxd PIM Woocommerce</h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <?php if($unbxd_pim_installed): ?>
+                                        <a href="<?php echo $installation_url ?>" target="_blank" style="width: 200px;" type="button" class="btn btn-primary primary-btn login-btn  font-weight-bold">
+                                            Dashboard
+                                        </a>
+                                    <?php else: ?>
+                                        <a href="http://localhost:8000/woocommerce/install/?store_url=<?php echo $site_url ?>" target="_blank" style="width: 200px;" type="button" class="btn btn-primary primary-btn login-btn  font-weight-bold">
+                                            Install Unbxd PIM
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>>
+                </div>
             </div>
+        </div>
+        <hr>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://pim.unbxd.com/"  height="700px;"></iframe>
         </div>
     </div>
     <?php
