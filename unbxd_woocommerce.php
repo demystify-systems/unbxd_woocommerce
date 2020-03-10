@@ -2,8 +2,8 @@
 /*
 Plugin Name: Unbxd PIM Woocommerce
 Plugin URI: https://unbxd.com
-description: >-
-   Plugin to integrate Unbxd PIM
+description:Unbxd PIM Get your product content in front of your shoppers faster Eliminate Manual Effort Product Why Unbxd PIM For many brands and online retailers, product data is fragmented across different formats and systems.
+Transforming this constantly changing data into meaningful product information is challenging at scale. Unbxd Product Information Management (PIM) offers a centralized, &hellip;
 Version: 1.0
 Author: Unbxd
 Author URI: http://pim.unbxd.io/
@@ -15,6 +15,9 @@ add_action('admin_menu','unbxd_pim_acions');
 
 
 function unbxd_pim_acions(){
+    /*
+     *  Hook method to add UNBXD PIM page to Wordpress tab
+     * */
     wp_enqueue_script( 'woo_plugin_script', plugins_url('/index.js', __FILE__), array('jquery'), '1.0', true );
     add_menu_page(
         'UNBXD Woocommerce Plugin','Unbxd','manage_options','woocommerceunbxd','woocommerceplugin_admin', plugins_url('images/logo.svg',__FILE__),2
@@ -22,7 +25,10 @@ function unbxd_pim_acions(){
 }
 
 function check_app_initialized($site_url){
-    //Initialize cURL.
+    /*
+     *  Method to check whether the store is installed on the UNBXD PIM.
+     * @param string $site_url - Woocommerce store URL
+     * */
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,"https://google.com");
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -63,7 +69,7 @@ function woocommerceplugin_admin(){
                                             Dashboard
                                         </a>
                                     <?php else: ?>
-                                        <a href="http://localhost:8000/woocommerce/install/?store_url=<?php echo $site_url ?>" target="_blank" style="width: 200px;" type="button" class="btn btn-primary primary-btn login-btn  font-weight-bold">
+                                        <a href="http://search.pimapps.unbxd.io/woocommerce/woocommerce/install/?store_url=<?php echo $site_url ?>" target="_blank" style="width: 200px;" type="button" class="btn btn-primary primary-btn login-btn  font-weight-bold">
                                             Install Unbxd PIM
                                         </a>
                                     <?php endif; ?>
