@@ -18,9 +18,9 @@ function unbxd_pim_acions(){
     /*
      *  Hook method to add UNBXD PIM page to Wordpress tab
      * */
-    wp_enqueue_script( 'woo_plugin_script', plugins_url('/index.js', __FILE__), array('jquery'), '1.0', true );
+    wp_enqueue_script( 'woo_plugin_script', plugins_url('static/js/index.js', __FILE__), array('jquery'), '1.0', true );
     add_menu_page(
-        'UNBXD Woocommerce Plugin','Unbxd','manage_options','woocommerceunbxd','woocommerceplugin_admin', plugins_url('images/logo.svg',__FILE__),2
+        'UNBXD Woocommerce Plugin','Unbxd','manage_options','woocommerceunbxd','woocommerceplugin_admin', plugins_url('static/images/logo.png',__FILE__),2
     );
 }
 
@@ -69,7 +69,7 @@ function woocommerceplugin_admin(){
                                             Dashboard
                                         </a>
                                     <?php else: ?>
-                                        <a href="http://search.pimapps.unbxd.io/woocommerce/woocommerce/install/?store_url=<?php echo $site_url ?>" target="_blank" style="width: 200px;" type="button" class="btn btn-primary primary-btn login-btn  font-weight-bold">
+                                        <a href="https://pimapps.unbxd.io/setup/woocommerce/install/?store_url=<?php echo $site_url ?>" target="_blank" style="width: 200px;" type="button" class="btn btn-primary primary-btn login-btn  font-weight-bold">
                                             Install Unbxd PIM
                                         </a>
                                     <?php endif; ?>
